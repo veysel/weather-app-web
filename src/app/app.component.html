@@ -12,14 +12,14 @@
             <form>
                 <div class="form-group">
                     <label for="selectCity">Şehir Seçimi</label>
-                    <select class="form-control" id="selectCity">
-                        <option>İstanbul</option>
+                    <select (change)="ChangeCity($event.target.value)" class="form-control" id="selectCity">
+                        <option *ngFor="let i of ListCity" value="{{i.il}}">{{i.il}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="selectCity">İlçe Seçimi</label>
+                    <label for="selectDistrict">İlçe Seçimi</label>
                     <select class="form-control" id="selectDistrict">
-                        <option>Üsküdar</option>
+                        <option *ngFor="let i of ListDistrict" value="{{i.ilce}}">{{i.ilce}}</option>
                     </select>
                 </div>
                 <div class="form-group">
