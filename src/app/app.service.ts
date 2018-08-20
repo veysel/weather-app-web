@@ -15,4 +15,8 @@ export class AppService {
     public GetDistrictListFromCity(city: string) {
         return this._http.get("https://servis.mgm.gov.tr/api/merkezler/ililcesi?il=" + city).map(x => x.json());
     }
+
+    public Search(merkezId: number) {
+        return this._http.get("https://servis.mgm.gov.tr/api/sondurumlar?merkezid=" + merkezId).map(x => x.json());;
+    }
 }

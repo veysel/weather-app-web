@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="selectDistrict">İlçe Seçimi</label>
                     <select [(ngModel)]="districtNgModel" name="selectDistrict" class="form-control" id="selectDistrict">
-                        <option *ngFor="let i of ListDistrict" value="{{i.ilce}}">{{i.ilce}}</option>
+                        <option *ngFor="let i of ListDistrict" value="{{i.merkezId}}">{{i.ilce}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto bg-dark text-center text-light m-4 p-2 rounded">
-            Sonuç
+            {{resultText}}
         </div>
     </div>
 </div>
