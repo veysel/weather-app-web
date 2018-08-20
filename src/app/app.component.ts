@@ -15,6 +15,9 @@ export class AppComponent {
   private ListCity: Array<CityModel> = new Array<CityModel>();
   private ListDistrict: Array<DistrictModel> = new Array<DistrictModel>();
 
+  private cityNgModel;
+  private districtNgModel;
+
   constructor(private appService: AppService) {
     this.ListCity = new Array<CityModel>();
 
@@ -29,6 +32,10 @@ export class AppComponent {
     this.appService.GetDistrictListFromCity(event).subscribe(response => {
       this.ListDistrict = response;
     });
+  }
+
+  private Search() {
+    
   }
 
 }

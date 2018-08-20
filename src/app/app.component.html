@@ -12,18 +12,18 @@
             <form>
                 <div class="form-group">
                     <label for="selectCity">Şehir Seçimi</label>
-                    <select (change)="ChangeCity($event.target.value)" class="form-control" id="selectCity">
+                    <select [(ngModel)]="cityNgModel" name="selectCity" (change)="ChangeCity($event.target.value)" class="form-control" id="selectCity">
                         <option *ngFor="let i of ListCity" value="{{i.il}}">{{i.il}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="selectDistrict">İlçe Seçimi</label>
-                    <select class="form-control" id="selectDistrict">
+                    <select [(ngModel)]="districtNgModel" name="selectDistrict" class="form-control" id="selectDistrict">
                         <option *ngFor="let i of ListDistrict" value="{{i.ilce}}">{{i.ilce}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-light">Ara</button>
+                    <button (click)="Search()" type="button" class="btn btn-light">Ara</button>
                 </div>
             </form>
         </div>
