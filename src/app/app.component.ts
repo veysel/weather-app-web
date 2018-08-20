@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { CityModel } from './Model/city.model';
 import { DistrictModel } from './Model/district.model';
 import { SonDurumModel } from './Model/son.durum.model';
+import { DisplayModel } from './Model/display.model';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
 
   public ListCity: Array<CityModel> = new Array<CityModel>();
   public ListDistrict: Array<DistrictModel> = new Array<DistrictModel>();
+  public ListDisplay: Array<DisplayModel> = new Array<DisplayModel>();
 
   public cityNgModel;
   public districtNgModel;
@@ -42,7 +44,13 @@ export class AppComponent {
       this.appService.Search(this.districtNgModel).subscribe(response => {
         if (response[0]) {
           let tempModel: SonDurumModel = response[0];
-          this.resultText = tempModel.sicaklik + " °C";
+          this.ListDisplay.unshift({
+            displayNo: tempModel.istNo,
+            city: this.cityNgModel,
+            district: this.districtNgModel,
+            sicaklik: tempModel.sicaklik,
+            merkezId: tempModel.nem
+          });
         }
       });
     }
