@@ -13,13 +13,13 @@ import { SonDurumModel } from './Model/son.durum.model';
 })
 export class AppComponent {
 
-  private ListCity: Array<CityModel> = new Array<CityModel>();
-  private ListDistrict: Array<DistrictModel> = new Array<DistrictModel>();
+  public ListCity: Array<CityModel> = new Array<CityModel>();
+  public ListDistrict: Array<DistrictModel> = new Array<DistrictModel>();
 
-  private cityNgModel;
-  private districtNgModel;
+  public cityNgModel;
+  public districtNgModel;
 
-  private resultText = "";
+  public resultText = "";
 
   constructor(private appService: AppService) {
     this.ListCity = new Array<CityModel>();
@@ -29,7 +29,7 @@ export class AppComponent {
     });
   }
 
-  private ChangeCity(event) {
+  public ChangeCity(event) {
     this.ListDistrict = new Array<DistrictModel>();
 
     this.appService.GetDistrictListFromCity(event).subscribe(response => {
@@ -37,7 +37,7 @@ export class AppComponent {
     });
   }
 
-  private Search() {
+  public Search() {
     if (this.districtNgModel) {
       this.appService.Search(this.districtNgModel).subscribe(response => {
         if (response[0]) {
