@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="selectDistrict">İlçe Seçimi</label>
+                    <label for="selectDistrict">Bölge Seçimi</label>
                     <select [(ngModel)]="districtNgModel" name="selectDistrict" class="form-control" id="selectDistrict">
                         <option *ngFor="let i of ListDistrict" value="{{i.merkezId}}">{{i.ilce}}</option>
                     </select>
@@ -39,6 +39,7 @@
                             <th scope="col">Şehir</th>
                             <th scope="col">Bölge</th>
                             <th scope="col">Sıcaklık</th>
+                            <th scope="col">Nem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +47,8 @@
                             <th scope="row">{{i.displayNo}}</th>
                             <td>{{i.city}}</td>
                             <td>{{i.district}}</td>
-                            <td>{{i.sicaklik}}</td>
+                            <td>{{i.sicaklik}} °C</td>
+                            <td>{{i.nem}} %</td>
                             <td>
                                 <button class="btn btn-danger btn-sm">x</button>
                             </td>

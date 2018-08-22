@@ -4,4 +4,5 @@ export class DisplayModel {
     district: string;
     merkezId: number;
     sicaklik: number;
+    nem: number;
 }

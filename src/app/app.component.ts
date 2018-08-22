@@ -21,8 +21,6 @@ export class AppComponent {
   public cityNgModel;
   public districtNgModel;
 
-  public resultText = "";
-
   constructor(private appService: AppService) {
     this.ListCity = new Array<CityModel>();
 
@@ -41,15 +39,18 @@ export class AppComponent {
 
   public Search() {
     if (this.districtNgModel) {
+      let districtName: string = this.ListDistrict.filter(x => x.merkezId == this.districtNgModel)[0].ilce;
+
       this.appService.Search(this.districtNgModel).subscribe(response => {
         if (response[0]) {
           let tempModel: SonDurumModel = response[0];
           this.ListDisplay.unshift({
             displayNo: tempModel.istNo,
             city: this.cityNgModel,
-            district: this.districtNgModel,
+            district: districtName,
+            merkezId: tempModel.karYukseklik,
             sicaklik: tempModel.sicaklik,
-            merkezId: tempModel.nem
+            nem: tempModel.nem
           });
         }
       });
