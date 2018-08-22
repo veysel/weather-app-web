@@ -57,4 +57,11 @@ export class AppComponent {
     }
   }
 
+  public DeleteItemDisplayList(item: DisplayModel) {
+    let index: number = this.ListDisplay.indexOf(item);
+    if (index !== -1) {
+      this.ListDisplay.splice(index, 1);
+    }
+  }
+
 }
