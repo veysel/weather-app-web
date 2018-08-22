@@ -21,6 +21,12 @@ export class AppComponent {
   public cityNgModel;
   public districtNgModel;
 
+  public UpdateOptions = {
+    State: true,
+    IntervalModel: null,
+    UpdateTime: 15
+  };
+
   constructor(private appService: AppService) {
     this.ListCity = new Array<CityModel>();
 
@@ -34,6 +40,8 @@ export class AppComponent {
         return 0;
       });
     });
+
+    this.UpdateFromInterval();
   }
 
   public ChangeCity(event) {
@@ -62,7 +70,7 @@ export class AppComponent {
             displayNo: tempModel.istNo,
             city: this.cityNgModel,
             district: districtName,
-            merkezId: tempModel.karYukseklik,
+            merkezId: this.districtNgModel,
             sicaklik: tempModel.sicaklik,
             nem: tempModel.nem
           });
@@ -76,6 +84,32 @@ export class AppComponent {
     if (index !== -1) {
       this.ListDisplay.splice(index, 1);
     }
+  }
+
+  public UpdateAllList() {
+    this.ListDisplay.forEach(x => {
+      this.appService.Search(x.merkezId).subscribe(response => {
+        if (response[0]) {
+          let tempModel: SonDurumModel = response[0];
+
+          x.sicaklik = tempModel.sicaklik;
+          x.nem = tempModel.nem;
+        }
+      });
+    });
+  }
+
+  public UpdateFromInterval() {
+    if (this.UpdateOptions.IntervalModel) {
+      clearInterval(this.UpdateOptions.IntervalModel);
+      this.UpdateOptions.IntervalModel = null;
+    }
+
+    this.UpdateOptions.IntervalModel = setInterval(() => {
+      if (this.UpdateOptions.State) {
+        this.UpdateAllList();
+      }
+    }, 1000 * this.UpdateOptions.UpdateTime);
   }
 
 }

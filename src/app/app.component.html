@@ -28,8 +28,20 @@
             </form>
         </div>
         <div style="max-height: 350px;" class="m-3 rounded col-lg-8 col-md-7 border border-secondary">
-            <div class="bg-secondary text-center text-light p-1 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Liste
+            <div class="input-group">
+                <input disabled type="text" class="form-control text-center" value="Liste">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ayarlar</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <label>
+                                <input [(ngModel)]="UpdateOptions.State" data-toggle="toggle" type="checkbox"> Otomatik Yenileme
+                            </label>
+                        </a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <button (click)="UpdateAllList()" class="dropdown-item" type="button">Tümünü Yenile</button>
+                    </div>
+                </div>
             </div>
             <div style="overflow: auto;max-height: 300px;" class="table-responsive">
                 <table class="table table-hover" style="font-size: 12px;">
