@@ -19,4 +19,8 @@ export class AppService {
     public Search(merkezId: number) {
         return this._http.get("https://servis.mgm.gov.tr/api/sondurumlar?merkezid=" + merkezId).map(x => x.json());;
     }
+
+    public GetInfoFromLatLon(lat: number, lon: number) {
+        return this._http.get("https://servis.mgm.gov.tr/api/merkezler/lokasyon?enlem=" + lat + "&boylam=" + lon).map(x => x.json());;
+    }
 }

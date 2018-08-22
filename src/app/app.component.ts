@@ -27,6 +27,11 @@ export class AppComponent {
     UpdateTime: 15
   };
 
+  public GeoLocationOptions = {
+    Lat: -1,
+    Lon: -1
+  };
+
   constructor(private appService: AppService) {
     this.ListCity = new Array<CityModel>();
 
@@ -42,6 +47,7 @@ export class AppComponent {
     });
 
     this.UpdateFromInterval();
+    this.GetLocation();
   }
 
   public ChangeCity(event) {
@@ -110,6 +116,38 @@ export class AppComponent {
         this.UpdateAllList();
       }
     }, 1000 * this.UpdateOptions.UpdateTime);
+  }
+
+  public GetLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.GeoLocationOptions.Lat = position.coords.latitude;
+        this.GeoLocationOptions.Lon = position.coords.longitude;
+
+        this.GetSearchInfoFromLocation();
+      });
+    }
+  }
+
+  public GetSearchInfoFromLocation() {
+    this.appService.GetInfoFromLatLon(this.GeoLocationOptions.Lat, this.GeoLocationOptions.Lon).subscribe(x => {
+      if (x) {
+        let tempInfo = x;
+        this.appService.Search(tempInfo.merkezId).subscribe(response => {
+          if (response[0]) {
+            let tempModel: SonDurumModel = response[0];
+            this.ListDisplay.unshift({
+              displayNo: tempModel.istNo,
+              city: tempInfo.il,
+              district: tempInfo.ilce,
+              merkezId: tempInfo.merkezId,
+              sicaklik: tempModel.sicaklik,
+              nem: tempModel.nem
+            });
+          }
+        });
+      }
+    });
   }
 
 }
