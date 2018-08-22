@@ -26,6 +26,13 @@ export class AppComponent {
 
     this.appService.GetCityList().subscribe(response => {
       this.ListCity = response;
+      this.ListCity = this.ListCity.sort((a, b) => {
+        if (a.il < b.il)
+          return -1;
+        if (a.il > b.il)
+          return 1;
+        return 0;
+      });
     });
   }
 
@@ -34,6 +41,13 @@ export class AppComponent {
 
     this.appService.GetDistrictListFromCity(event).subscribe(response => {
       this.ListDistrict = response;
+      this.ListDistrict = this.ListDistrict.sort((a, b) => {
+        if (a.ilce < b.ilce)
+          return -1;
+        if (a.ilce > b.ilce)
+          return 1;
+        return 0;
+      });
     });
   }
 
